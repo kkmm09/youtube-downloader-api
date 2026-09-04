@@ -10,7 +10,11 @@ app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def download_video():
+# ★ここから下はすべて行の頭に「半角スペース4つ」以上のすき間が必要です
 data = request.json
+if not data:
+return jsonify({"status": "error", "message": "No JSON data received"}), 400
+
 url = data.get('url')
 if not url:
 return jsonify({"status": "error", "message": "URL is required"}), 400
